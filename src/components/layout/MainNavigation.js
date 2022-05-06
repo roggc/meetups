@@ -1,8 +1,9 @@
 import { ALL_MEETUP_PAGE, FAVORITES_PAGE, NEW_MEETUP_PAGE } from "./../../utils/constants";
-
+import {useValues,favourites} from '../../slices'
 import classes from "./MainNavigation.module.css";
 
 export default function MainNavigation({ setPage }) {
+  const {[favourites]:{ids}}=useValues(favourites)
   return (
     <header className={classes.header} data-test="navigation-header">
       <div className={classes.logo}>React Meetups</div>
@@ -22,7 +23,7 @@ export default function MainNavigation({ setPage }) {
           <li>
             <a href="#" onClick={() => setPage(FAVORITES_PAGE)}>
               My Favorites
-              <span className={classes.badge}>{0}</span>
+              <span className={classes.badge}>{ids.length}</span>
             </a>
           </li>
         </ul>

@@ -1,8 +1,10 @@
 
 import classes from "./MeetupItem.module.css";
-import Card from "../ui/Card";
+import Card from "../ui/Card"
+import {useActions,favourites} from '../../slices'
 
 export default function MeetupItem({item}) {
+  const {[favourites]:{add}}=useActions()
   return (
     <li className={classes.item} data-test='meet-up-item'>
       <Card>
@@ -15,7 +17,7 @@ export default function MeetupItem({item}) {
           <p>{item.description}</p>
         </div>
         <div className={classes.actions}>
-          <button>Add to favorites</button>
+          <button onClick={()=>add(item.id)}>Add to favorites</button>
         </div>
       </Card>
     </li>
