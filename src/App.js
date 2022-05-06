@@ -11,11 +11,10 @@ import {
 
 import MainNavigation from "./components/layout/MainNavigation";
 import Layout from "./components/layout/Layout";
-
-import AppProvider from "./slices";
+import {useValues,pages}from './slices'
 
 function App() {
-  const [page, setPage] = useState(ALL_MEETUP_PAGE);
+  const {[pages]:{page}}=useValues(pages)
 
   function getCurrentPageComponent() {
     let currentPageComponent = <AllMeetupsPage />;
@@ -34,12 +33,10 @@ function App() {
   }
 
   return (
-    <AppProvider>
       <div data-test="app">
-        <MainNavigation setPage={setPage} />
+        <MainNavigation />
         <Layout>{getCurrentPageComponent()}</Layout>
       </div>
-    </AppProvider>
   );
 }
 
