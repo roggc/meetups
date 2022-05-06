@@ -44,11 +44,9 @@ function App() {
         if (st > lastScrollTop) {
           // downscroll code
           setIsShown(false)
-          console.log("scroll down");
         } else {
           // upscroll code
           setIsShown(true)
-          console.log("scroll up");
         }
         lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
       },
