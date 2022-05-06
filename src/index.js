@@ -1,9 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import './index.css';
-import App from './App';
+import "./index.css";
+import App from "./App";
 
-import AppProvider from './slices'
+import AppProvider from "./slices";
+import { BrowserRouter as Router } from "react-router-dom";
 
-ReactDOM.render(<AppProvider><App /></AppProvider>, document.getElementById('root'));
+ReactDOM.render(
+  <AppProvider>
+    <Router>
+      <App />
+    </Router>
+  </AppProvider>,
+  document.getElementById("root")
+);

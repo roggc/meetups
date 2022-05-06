@@ -1,6 +1,7 @@
 import { ALL_MEETUP_PAGE, FAVORITES_PAGE, NEW_MEETUP_PAGE } from "./../../utils/constants";
 import {useValues,favourites,useActions,pages} from '../../slices'
 import classes from "./MainNavigation.module.css";
+import {Link} from 'react-router-dom'
 
 export default function MainNavigation() {
   const {[favourites]:{ids}}=useValues(favourites)
@@ -11,21 +12,21 @@ export default function MainNavigation() {
       <nav>
         <ul>
           <li>
-            <a href="#" onClick={() => set(ALL_MEETUP_PAGE)}>
+            <Link to="/" onClick={() => set(ALL_MEETUP_PAGE)}>
               All Meetups
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a href="#" onClick={() => set(NEW_MEETUP_PAGE)}>
+            <Link to="/new-mettup" onClick={() => set(NEW_MEETUP_PAGE)}>
               Add New Meetup
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#" onClick={() => set(FAVORITES_PAGE)}>
+            <Link to="/favourites" onClick={() => set(FAVORITES_PAGE)}>
               My Favorites
               <span className={classes.badge}>{ids.length}</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

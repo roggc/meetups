@@ -1,20 +1,20 @@
-import { useState } from "react";
-
 import AllMeetupsPage from "./pages/AllMeetupsPage";
 import FavoritesPage from "./pages/Favorites";
 import NewMeetupsPage from "./pages/NewMeetup";
-import {
-  ALL_MEETUP_PAGE,
-  FAVORITES_PAGE,
-  NEW_MEETUP_PAGE,
-} from "./utils/constants";
+import { FAVORITES_PAGE, NEW_MEETUP_PAGE } from "./utils/constants";
 
 import MainNavigation from "./components/layout/MainNavigation";
 import Layout from "./components/layout/Layout";
-import {useValues,pages}from './slices'
+import { useValues, pages,useActions,header } from "./slices";
+
+import { useEffect } from "react";
 
 function App() {
-  const {[pages]:{page}}=useValues(pages)
+  const {
+    [pages]: { page },
+  } = useValues(pages);
+
+  const {[header]:{setIsShown}}=useActions()
 
   function getCurrentPageComponent() {
     let currentPageComponent = <AllMeetupsPage />;
@@ -32,11 +32,35 @@ function App() {
     return currentPageComponent;
   }
 
+  useEffect(() => {
+    var lastScrollTop = 0;
+
+    // element should be replaced with the actual target element on which you have applied scroll, use window in case of no target element.
+    window.addEventListener(
+      "scroll",
+      function () {
+        // or window.addEventListener("scroll"....
+        var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+        if (st > lastScrollTop) {
+          // downscroll code
+          setIsShown(false)
+          console.log("scroll down");
+        } else {
+          // upscroll code
+          setIsShown(true)
+          console.log("scroll up");
+        }
+        lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+      },
+      false
+    );
+  }, []);
+
   return (
-      <div data-test="app">
-        <MainNavigation />
-        <Layout>{getCurrentPageComponent()}</Layout>
-      </div>
+    <div data-test="app">
+      <MainNavigation />
+      <Layout>{getCurrentPageComponent()}</Layout>
+    </div>
   );
 }
 
