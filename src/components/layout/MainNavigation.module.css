@@ -8,7 +8,7 @@
     padding: 0 10%;
     position:sticky;
     top:0;
-    transition:top 1s;
+    transition:top .3s;
   }
   
 .header.hidden{

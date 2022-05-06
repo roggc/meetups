@@ -52,6 +52,9 @@ function App() {
       },
       false
     );
+    return ()=>{
+      window.removeEventListener('scroll')
+    }
   }, []);
 
   return (

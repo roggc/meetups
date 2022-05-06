@@ -1,14 +1,23 @@
-
 import classes from "./MeetupItem.module.css";
-import Card from "../ui/Card"
-import {useActions,favourites,useValues,pages} from '../../slices'
-import {ALL_MEETUP_PAGE,FAVORITES_PAGE} from '../../utils/constants'
+import Card from "../ui/Card";
+import { useActions, favourites, useValues, pages } from "../../slices";
+import { ALL_MEETUP_PAGE, FAVORITES_PAGE } from "../../utils/constants";
 
-export default function MeetupItem({item}) {
-  const {[favourites]:{add,substract}}=useActions()
-  const {[pages]:{page}}=useValues(pages)
+export default function MeetupItem({ item }) {
+  const {
+    [favourites]: { add, substract },
+  } = useActions();
+  const {
+    [pages]: { page },
+  } = useValues(pages);
+  const {
+    [favourites]: { ids },
+  } = useValues(favourites);
+
+  const isInFavourites = (id) => ids.some((id_) => id === id_);
+
   return (
-    <li className={classes.item} data-test='meet-up-item'>
+    <li className={classes.item} data-test="meet-up-item">
       <Card>
         <div className={classes.image}>
           <img src={item.image} alt={item.title} />
@@ -18,12 +27,18 @@ export default function MeetupItem({item}) {
           <address>{item.address}</address>
           <p>{item.description}</p>
         </div>
-        {page===ALL_MEETUP_PAGE&&<div className={classes.actions}>
-          <button onClick={()=>add(item.id)}>Add to favorites</button>
-        </div>}
-        {page===FAVORITES_PAGE&&<div className={classes.actions}>
-          <button onClick={()=>substract(item.id)}>Remove from favorites</button>
-        </div>}
+        {page === ALL_MEETUP_PAGE && !isInFavourites(item.id) && (
+          <div className={classes.actions}>
+            <button onClick={() => add(item.id)}>Add to favorites</button>
+          </div>
+        )}
+        {page === FAVORITES_PAGE && (
+          <div className={classes.actions}>
+            <button onClick={() => substract(item.id)}>
+              Remove from favorites
+            </button>
+          </div>
+        )}
       </Card>
     </li>
   );
