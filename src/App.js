@@ -55,7 +55,7 @@ function App() {
     return ()=>{
       window.removeEventListener('scroll')
     }
-  }, []);
+  }, [setIsShown]);
 
   return (
     <div data-test="app">
