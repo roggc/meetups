@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Meetups
+This project uses npm library [react-context-slices](https://github.com/roggc/react-context-slices). I am the author of this library. It allows us to work with react context in an optimal way, to manage state in a way similar to redux. A post written by me explaining this can be found [here](https://dev.to/roggc/state-management-with-react-hooks-3608).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Before executing any of the available scripts you must install the dependencies with **npm i** in the root directory.
 
 ## Available Scripts
 
